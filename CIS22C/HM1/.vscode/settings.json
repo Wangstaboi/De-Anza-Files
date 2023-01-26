@@ -1,6 +1,8 @@
 {
     "files.associations": {
-        "random": "cpp"
+        "random": "cpp",
+        "typeinfo": "cpp",
+        "new": "cpp"
     },
     "C_Cpp.loggingLevel": "Debug"
 }

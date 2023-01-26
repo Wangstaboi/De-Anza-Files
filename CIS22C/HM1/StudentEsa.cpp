@@ -2,32 +2,24 @@
 
 #include <iostream>
 #include "Student.h"
-
+#include "StudentEsa.h"
 
 using namespace std;
 
-class StudentEsa
-{
-private:
-    Student* *sap; // pointer to array of student pointers
-    Student* *tp; // Use in realloc?
-    int cnum; // num of students
-    int cmz; // current max size of array
-    int n; // returns min value of 2 compared ints
-public:
+
     //Default Constructor
-    StudentEsa() {
+    StudentEsa::StudentEsa() {
       sap = nullptr;
       tp = nullptr;
       cnum = 0;
       cmz = 0;
     }
 
-    StudentEsa(StudentEsa& s) {
+    StudentEsa::StudentEsa(StudentEsa& s) {
         *this = s;
     }
 
-    StudentEsa(int ms) {
+    StudentEsa::StudentEsa(int ms) {
         sap = new Student* [ms];
         cnum = 0; 
         tp = NULL;
@@ -35,33 +27,33 @@ public:
 
     }
 
-    void copy(StudentEsa& s) {
+    void StudentEsa::copy(StudentEsa& s) {
        
 
     }
 
-    void realloc() {
+    void StudentEsa::realloc() {
         tp = new Student* [cmz * 2];
         cmz *= 2;
     }
 
-    ~StudentEsa() {
+    StudentEsa::~StudentEsa() {
 
-        //delete sap;
+
 
     }
 
-    int getNum() {
+    int StudentEsa::getNum() {
         return cnum; // done
     }
 
-    Student* get(int idx) {
+    Student* StudentEsa::get(int idx) {
         if ((idx < 0) || (idx >= cnum)) return (NULL); // Bad index
         return (sap[idx]); // Otherwise return Student ptr at that index in the array
 
     }
 
-    int set(Student* s, int idx) {
+    int StudentEsa::set(Student* s, int idx) {
         if(idx < 0 || idx >= cnum) return -1;
         //delete sap[idx];
         sap[idx] = s;
@@ -86,7 +78,7 @@ public:
         return 0;
     }
 */
-    int insert(Student* student, int idx){
+    int StudentEsa::insert(Student* student, int idx){
     if(idx < 0 || idx >= cmz) return -1;
 
     if(cnum == cmz){
@@ -104,7 +96,7 @@ public:
         sap = tp;
         tp = NULL;
         cnum++;
-        //cmz = cmz * 2;
+        
         return idx;
     }
     // pushing back subsequent element
@@ -121,7 +113,7 @@ public:
   }
 
 
-    int remove(int idx) {
+    int StudentEsa::remove(int idx) {
         if (idx >= cmz || idx < 0) return -1;
         Student* student = sap[idx];
         for (int i = idx + 1; i < cnum; i++) {
@@ -131,22 +123,17 @@ public:
         return idx;
     }
 
-    int append(Student* s) {
+    int StudentEsa::append(Student* s) {
         
        return insert(s, cnum);
 
     }
     
-    int prepend(Student* s) {
-         /*
-        for (int i = cnum; i > 1; i--) {
-            sap[i + 1] = sap[i];
-        }
-        sap[0] = s;
-        */
+    int StudentEsa::prepend(Student* s) {
+        
        return insert(s, 0);
     }
-};
+
 
 
 
