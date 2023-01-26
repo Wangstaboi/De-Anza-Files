@@ -12,9 +12,9 @@ class StudentEsa
 {
 private:  // Define what you need
 	Student* *sap; // Underlying pointer to array of Student pointers, which you will allocate
-      Student* *tp;  // Optionally used in realloc
+    Student* *tp;  // Optionally used in realloc
 	int cnum; // Number of students currently in array
-      int cmz; // Current Max size of the array (may need to be expanded)
+    int cmz; // Current Max size of the array (may need to be expanded)
 
 public: // Publically supported methods you need to implement
 	StudentEsa(); // Default Constructor
@@ -22,6 +22,7 @@ public: // Publically supported methods you need to implement
 
 	StudentEsa(int);  // Initialization Constructor.  Allocate array of this size.  May need to be expanded
 
+	void copy(StudentEsa&);
 //  *** The code for this would look like:
 
 //  StudentEsa(int ms) { // Allocate array of this many Student Pointers
