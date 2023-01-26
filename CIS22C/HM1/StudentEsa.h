@@ -23,6 +23,8 @@ public: // Publically supported methods you need to implement
 	StudentEsa(int);  // Initialization Constructor.  Allocate array of this size.  May need to be expanded
 
 	void copy(StudentEsa&);
+
+	void realloc();
 //  *** The code for this would look like:
 
 //  StudentEsa(int ms) { // Allocate array of this many Student Pointers

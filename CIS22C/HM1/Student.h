@@ -1,6 +1,7 @@
 #pragma once
 using namespace std;
 #include <iostream>
+#include <string>
 
 class Student
 {   // A VERY simple Student consisting only of the student's ID and Name

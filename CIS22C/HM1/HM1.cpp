@@ -1,8 +1,9 @@
 // CIS22C-HM1.cpp : This file contains the 'main' function for Homework 1. Program execution begins and ends here.
 //
 
-#pragma once
+
 using namespace std;
+
 #include <iostream>
 #include <fstream>
 #include "Student.h"
