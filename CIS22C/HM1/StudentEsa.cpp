@@ -1,4 +1,4 @@
-
+//Ryan Wang - CIS22C - StudentEsa.cpp
 
 #include <iostream>
 #include "Student.h"
@@ -15,10 +15,12 @@ using namespace std;
       cmz = 0;
     }
 
+    //Copy Constructor
     StudentEsa::StudentEsa(StudentEsa& s) {
         *this = s;
     }
 
+    
     StudentEsa::StudentEsa(int ms) {
         sap = new Student* [ms];
         cnum = 0; 
@@ -27,71 +29,62 @@ using namespace std;
 
     }
 
+    //too lazy to delete from header and this file
     void StudentEsa::copy(StudentEsa& s) {
        
 
     }
 
+    // Reusable realloc function. Creates new array of student pointers that is double size of previous, assigns to tp
     void StudentEsa::realloc() {
         tp = new Student* [cmz * 2];
         cmz *= 2;
     }
 
+    //Destructor 
     StudentEsa::~StudentEsa() {
 
-
+        delete sap;
 
     }
 
+    // Returns num of students
     int StudentEsa::getNum() {
-        return cnum; // done
+        return cnum; 
     }
 
+    //Returns student at given index
     Student* StudentEsa::get(int idx) {
         if ((idx < 0) || (idx >= cnum)) return (NULL); // Bad index
         return (sap[idx]); // Otherwise return Student ptr at that index in the array
 
     }
 
+    //Replaces student at given index with a user-supplied student
     int StudentEsa::set(Student* s, int idx) {
-        if(idx < 0 || idx >= cnum) return -1;
+        if(idx < 0 || idx >= cnum) return -1; //Return error on invalid index
         //delete sap[idx];
-        sap[idx] = s;
+        sap[idx] = s; //replaces/reassigns student at given index with user supplied student
         return idx;
 
     }
-/**
-    int insert(Student* s, int idx) {
-        if (idx >= cmz) return -1;
-        
-        if (cnum == cmz) {
-            realloc();
-            for (int j = 0; j < idx; j++){
-            tp[j] = sap[j];
-        }
-        }
-        for (int i = cnum; i > idx; i--) {
-            sap[i] = sap[i + 1];
-        }
 
-        sap[idx] = s;
-        return 0;
-    }
-*/
+    //Inserts a new student in given index, pushes back subsequent students in array, and if necessary reallocs.
     int StudentEsa::insert(Student* student, int idx){
     if(idx < 0 || idx >= cmz) return -1;
 
+// Reallocs and pushes back if number of students reaches size of array
     if(cnum == cmz){
-        // reallaoc
         realloc(); // allocate twice of previous size
-        // copy till idx
-        int i = 0;
-        for(i = 0; i < idx; i++){
-            tp[i] = sap[i];
+
+        for(int i = 0; i < idx; i++){
+            tp[i] = sap[i]; //copies sap to tp
         }
-        tp[i] = student; 
-        for(i = idx; i < cnum ; i++){
-            tp[i + 1] = sap[i];
+
+        tp[idx] = student; 
+
+        for(int i = idx; i < cnum; i++){
+            tp[i + 1] = sap[i]; 
         }
         sap = tp;
         tp = NULL;
@@ -99,39 +92,43 @@ using namespace std;
         
         return idx;
     }
-    // pushing back subsequent element
+
+    // Inserting user given student into user given index, and pushing back all subsequent elements
     Student* prev = student;
-    for(int i = idx ; i < cnum; i++){
-        Student* np = sap[i];
+    for(int i = idx; i < cnum; i++){
+        Student* temp = sap[i];
         sap[i] = prev;
-        prev = np;
+        prev = temp;
     }
-    sap[cnum] = prev;
-    // increase count
-    cnum++;
+    sap[cnum] = prev; //Makes sure last element gets updated
+   
+    cnum++; // Since a student has been added, cnum is incremented (1 more student in cnum)
     return idx;
   }
 
-
+    //Removes a student from an array by shifting all students after down 1
     int StudentEsa::remove(int idx) {
-        if (idx >= cmz || idx < 0) return -1;
-        Student* student = sap[idx];
+        if (idx >= cmz || idx < 0) return -1; //Return error for invalid index
+        Student* student = sap[idx];    //student pointer pints to array sap at index idx
+        //Loop shifts everything down 1. This will overwrite the Student at the given index, therefore removing it
         for (int i = idx + 1; i < cnum; i++) {
             sap[i - 1] = sap[i];
         }
-        cnum -= 1;
+        cnum -= 1; // decrement cnum, because we just removed a student
         return idx;
     }
 
+    //Calls the insert function but index is cnum (last occupied index)
     int StudentEsa::append(Student* s) {
         
-       return insert(s, cnum);
+       return insert(s, cnum); //appending is just inserting but at the last element of an array
 
     }
     
+    //Calls insert function but index is at beginning of array
     int StudentEsa::prepend(Student* s) {
         
-       return insert(s, 0);
+       return insert(s, 0); //Prepending is just inserting at the start of an array
     }
 
 
