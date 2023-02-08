@@ -104,12 +104,23 @@ b. explain why CF and OF flags have that value
 mov al, 0C0h 
 
 add al, 50h     
-; a. ZF = 1  SF = 0  CF = 1  OF = 1
+    (1)
+	 1100 0000
+   + 0101 0000
+	 ---------
+ (1) 0000 0000
+; a. ZF = 1  SF = 0  CF = 1  OF = 1 (Correct answer is 0)
 ; b. explanation for CF: Add operation too big for al, therefore carry flag is 1 	
-;    explanation for OF: MSB is set to 1, therefore OF is 1
+;    explanation for OF: MSB is set to 1, therefore OF is 1 (Carry out xor carry in 1 xor 1 = 0)
 
 sub al, 0A0h     
-; a. ZF = 1  SF = 0  CF = 0  OF = 0
-; b. explanation for CF: Subtracting means smaller number, means no way itll have to carry (ends in 0 so positive)
+
+	0001 0000
++   0110 0000
+-------------
+(0) 0111 0000
+
+; a. ZF = 1 (correct answer 0)  SF = 0  CF = 0 (correct answer 1) OF = 0
+; b. explanation for CF: carry out is 0, opposite of carry out
 ;    explanation for OF: Subtracting means smaller, so no overflow (also its positive)
 @
