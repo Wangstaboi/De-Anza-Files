@@ -5,9 +5,11 @@
             "label": "C/C++: g++ build active file",
             "command": "/usr/bin/g++",
             "args": [
-                "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "-Wall",
+                "-Wextra",
+                "-Wpedantic",
+                "${workspaceFolder}/**.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

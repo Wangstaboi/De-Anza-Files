@@ -13,7 +13,7 @@ using namespace std;
         btm = s;
         top = s + 1;
         for (int i = 0; i < btm; i++) {
-            
+            soa[i] = NULL;
         }
 
 
@@ -44,13 +44,17 @@ using namespace std;
 
     int StudentDQI::pushFront(Student* s){
 
-        
-       btm--;
+       sa[btm--] = s; 
+       //btm--;
+       return btm;
 
     } // Prepend a new element to the front
     Student* StudentDQI::popFront(){
-
-       btm++; 
+        if (isEmpty()) {
+            return nullptr;
+        }
+        Student* first = sa[btm--];
+       return first;
 
     }      // Remove the first element and return it
     Student* StudentDQI::lookFront(){
@@ -59,13 +63,17 @@ using namespace std;
 
     }      // Return the first element but do not remove it
 
-    int StudentDQI::pushBack(Student*){
-        
+    int StudentDQI::pushBack(Student* s){
+        sa[top] = s;
         top++;
+        return top;
     } // Append a new element to the back
     Student* StudentDQI::popBack(){
-
-        top--;
+        if (isEmpty()) {
+            return nullptr;
+        }
+        Student* last = sa[top--];
+        return last;
 
     }    // Remove the last element and return it
     Student* StudentDQI::lookBack(){
