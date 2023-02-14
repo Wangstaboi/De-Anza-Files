@@ -2,15 +2,17 @@
 using namespace std;
 #include <iostream>
 #include "Student.h"
-// #include "StudentEsa.h"  // Student Orderable Array (normally enabled)
+#include "StudentEsa.h"  // Student Orderable Array (normally enabled)
 
 
 class StudentDQI {
 private:
-    //  StudentEsa* soa;  // Allocated Student Orderable Array (normally enabled)
+    StudentEsa* soa;  // Allocated Student Orderable Array (normally enabled)
+    //StudentEsa* *tp;
     Student** sa; // Pointer to actual array of Student Ptrs
     
     // These might be useful;
+    unsigned int numStudent;
     unsigned int top; // Index value 1 above highest OA element used
     unsigned int btm; // Index value 1 below lowest OA element used
 public:
@@ -19,7 +21,7 @@ public:
     ~StudentDQI(); // Destruct the DQI (free OA space)
 
     int getSize();  // Gets # elements (Student *) in the DQ
-    bool isEmpty(); // True if no elements held (“pop” will fail)
+    bool isEmpty(); // True if no elements held (ï¿½popï¿½ will fail)
 
     int pushFront(Student*); // Prepend a new element to the front
     Student* popFront();      // Remove the first element and return it
