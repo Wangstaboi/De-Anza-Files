@@ -1,6 +1,3 @@
-Use input file:  Hm2Test.txt
-Using input file Hm2Test.txt
-
 Read Array size 400  Read # commands 20
 Command: Z  -1  -1
 Empty : 1
@@ -17,14 +14,16 @@ Size:  3
 Command: B  67890  RizzutoPhil
 Pushed Back 67890  RizzutoPhil
 Command: G  -1  -1
-Pop Front 12345  KleinmanRonald
+Woops, we got a nullptr!
 Command: G  -1  -1
+Pop Front 87654  SmithMary
 Command: Z  -1  -1
 Empty : 0
 Command: H  -1  -1
-Look Front 87654  SmithMary
+Look Front 54321  BerraYogi
 Command: D  -1  -1
 404
+Look Backt 67890  RizzutoPhil
 Command: S  -1  -1
 Size:  2
 Command: F  67890  MantleMickey
@@ -43,3 +42,12 @@ Command: B  10200  SkowronMoose
 Pushed Back 10200  SkowronMoose
 ------------------
 Start Popping from bottom  8  Elements queued
+
+Student: ID = 10200  Name = SkowronMoose
+Student: ID = 89012  Name = KoufaxSandy
+Student: ID = 89300  Name = KoufaxSandy
+Student: ID = 67890  Name = RizzutoPhil
+Student: ID = 54321  Name = BerraYogi
+Student: ID = 87654  Name = SmithMary
+Student: ID = 67890  Name = MantleMickey
+Student: ID = 99887  Name = MarisRoger

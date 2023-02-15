@@ -56,6 +56,7 @@ using namespace std;
     //Returns student at given index
     Student* StudentEsa::get(int idx) {
         if ((idx < 0) || (idx > cnum)) {
+            cout << "Index: " << idx << " CNum: " << cnum << endl;
             cout << "Nope. Didn't work." << endl;
             return (NULL);
             } // Bad index

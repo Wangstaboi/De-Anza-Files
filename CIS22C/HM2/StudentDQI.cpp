@@ -16,7 +16,7 @@ using namespace std;
         back = s + 1;
         front = s;
         // Loop till btm and fill with nullptr?
-        for (int i = 0; i < front; i++) {
+        for (int i = 0; i <= front; i++) {
             soa->append(nullptr);
             
         } 
@@ -66,7 +66,7 @@ using namespace std;
         if (isEmpty()) {
             return nullptr;
         }
-        Student* first = soa->get(front);
+        Student* first = soa->get(front + 1);
         //soa->remove(front);
         soa->set(nullptr, front);
         if (first == nullptr) {
@@ -80,7 +80,7 @@ using namespace std;
     Student* StudentDQI::lookFront(){
 
         //soa[btm]->get(btm);
-        return soa->get(front);
+        return soa->get(front + 1);
 
     }      // Return the first element but do not remove it
 
@@ -95,7 +95,7 @@ using namespace std;
             cout << "Hi mom" << endl;
             return nullptr;
         }
-        Student* last = soa->get(back);
+        Student* last = soa->get(back - 1);
         //soa->remove(back);
         back--;
         soa->set(nullptr, back);
@@ -107,6 +107,6 @@ using namespace std;
     }    // Remove the last element and return it
     Student* StudentDQI::lookBack(){
         cout << back << endl;
-        return soa->get(back);
+        return soa->get(back - 1);
 
     }     // Return the last element but do not remove it
