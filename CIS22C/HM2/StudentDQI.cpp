@@ -6,15 +6,21 @@
 
 using namespace std;
 
-    // 
+    // TODO: Initialize ESA with 2 times size of s and fill halfway with nullptr
+    // Confused af as to how to do
     StudentDQI::StudentDQI(unsigned int s) {
         
-        *(&soa) = new StudentEsa[s * 2];
-        btm = s;
-        top = s + 1;
-        for (int i = 0; i < btm; i++) {
-            soa[i] = NULL;
-        }
+        
+        soa = new StudentEsa(s * 2); 
+        //tp = soa;
+        back = s + 1;
+        front = s;
+        // Loop till btm and fill with nullptr?
+        for (int i = 0; i < front; i++) {
+            soa->append(nullptr);
+            
+        } 
+
 
 
     } // Create a DQ with this initial size 
@@ -31,12 +37,12 @@ using namespace std;
 
     int StudentDQI::getSize(){
         
-        return top - btm;
+        return (back - front) - 1;
 
     }  // Gets # elements (Student *) in the DQ
     bool StudentDQI::isEmpty(){
 
-        if (top - btm == 1) {
+        if (back - front == 1) {
             return true;
         } else return false;
 
@@ -44,41 +50,63 @@ using namespace std;
 
     int StudentDQI::pushFront(Student* s){
 
-       sa[btm--] = s; 
-       //btm--;
-       return btm;
+       //*(soa[btm]) = s; 
+       front--;
+    //    if (soa->set(s, front) == -1) {
+    //     cout << "Error!" << endl;
+    //     cout << soa->getNum() << endl;
+    //    };
+        soa->set(s, front);
+       
+
+       return 0;
 
     } // Prepend a new element to the front
     Student* StudentDQI::popFront(){
         if (isEmpty()) {
             return nullptr;
         }
-        Student* first = sa[btm--];
+        Student* first = soa->get(front);
+        //soa->remove(front);
+        soa->set(nullptr, front);
+        if (first == nullptr) {
+            cout << "Woops, we got a nullptr!" << endl;
+        }
+        front++;
+        
        return first;
 
     }      // Remove the first element and return it
     Student* StudentDQI::lookFront(){
 
-        return sa[btm];
+        //soa[btm]->get(btm);
+        return soa->get(front);
 
     }      // Return the first element but do not remove it
 
     int StudentDQI::pushBack(Student* s){
-        sa[top] = s;
-        top++;
-        return top;
+        back++;
+        soa->append(s);
+    
+        return back;
     } // Append a new element to the back
     Student* StudentDQI::popBack(){
         if (isEmpty()) {
+            cout << "Hi mom" << endl;
             return nullptr;
         }
-        Student* last = sa[top--];
+        Student* last = soa->get(back);
+        //soa->remove(back);
+        back--;
+        soa->set(nullptr, back);
+        if (last == nullptr) {
+            cout << "Hi dad" << endl;
+        }
         return last;
 
     }    // Remove the last element and return it
     Student* StudentDQI::lookBack(){
-        
-        
-        return sa[top];
+        cout << back << endl;
+        return soa->get(back);
 
     }     // Return the last element but do not remove it

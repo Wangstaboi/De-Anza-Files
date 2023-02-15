@@ -1,0 +1,41 @@
+Read Array size 400  Read # commands 20
+Command: Z  -1  -1
+Empty : 1
+Command: F  12345  KleinmanRonald
+Pushed Front 12345  KleinmanRonald
+Command: Z  -1  -1
+Empty : 0
+Command: B  87654  SmithMary
+Pushed Back 87654  SmithMary
+Command: B  54321  BerraYogi
+Pushed Back 54321  BerraYogi
+Command: S  -1  -1
+Size:  3
+Command: B  67890  RizzutoPhil
+Pushed Back 67890  RizzutoPhil
+Command: G  -1  -1
+Pop Front 12345  KleinmanRonald
+Command: G  -1  -1
+Pop Front 87654  SmithMary
+Command: Z  -1  -1
+Empty : 0
+Command: H  -1  -1
+Look Front 54321  BerraYogi
+Command: D  -1  -1
+Look Backt 67890  RizzutoPhil
+Command: S  -1  -1
+Size:  2
+Command: F  67890  MantleMickey
+Pushed Front 67890  MantleMickey
+Command: B  89300  KoufaxSandy
+Pushed Back 89300  KoufaxSandy
+Command: B  89012  KoufaxSandy
+Pushed Back 89012  KoufaxSandy
+Command: F  99887  MarisRoger
+Pushed Front 99887  MarisRoger
+Command: S  -1  -1
+Size:  6
+Command: F  62109  FordWhitey
+Pushed Front 62109  FordWhitey
+Command: B  10200  SkowronMoose
+Pushed Back 10200  SkowronMoose

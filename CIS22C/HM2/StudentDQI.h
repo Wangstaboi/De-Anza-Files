@@ -8,13 +8,13 @@ using namespace std;
 class StudentDQI {
 private:
     StudentEsa* soa;  // Allocated Student Orderable Array (normally enabled)
-    //StudentEsa* *tp;
-    Student** sa; // Pointer to actual array of Student Ptrs
+    //StudentEsa* tp;
+    //Student** sa; // Pointer to actual array of Student Ptrs
     
     // These might be useful;
-    unsigned int numStudent;
-    unsigned int top; // Index value 1 above highest OA element used
-    unsigned int btm; // Index value 1 below lowest OA element used
+    //unsigned int numStudent;
+    unsigned int front; // Index value 1 above highest OA element used
+    unsigned int back; // Index value 1 below lowest OA element used
 public:
     StudentDQI(unsigned int); // Create a DQ with this initial size 
     StudentDQI(StudentDQI&); // Equate this to an existing DQ (can use private parts directly)

@@ -55,7 +55,11 @@ using namespace std;
 
     //Returns student at given index
     Student* StudentEsa::get(int idx) {
-        if ((idx < 0) || (idx >= cnum)) return (NULL); // Bad index
+        if ((idx < 0) || (idx > cnum)) {
+            cout << "Nope. Didn't work." << endl;
+            return (NULL);
+            } // Bad index
+        //cout << *(&sap[idx]) << endl;
         return (sap[idx]); // Otherwise return Student ptr at that index in the array
 
     }
@@ -71,11 +75,15 @@ using namespace std;
 
     //Inserts a new student in given index, pushes back subsequent students in array, and if necessary reallocs.
     int StudentEsa::insert(Student* student, int idx){
-    if(idx < 0 || idx >= cmz) return -1;
+       // cout << "Does this even run " << "Index: " << idx << " Array Size: " << cmz << endl;
+    if(idx < 0 || idx > cnum) {
+       // cout << "Please don't print" << endl;
+        return -1;
+    }
 
 // Reallocs and pushes back if number of students reaches size of array
     if(cnum == cmz){
-        realloc(); // allocate twice of previous size
+       realloc(); // allocate twice of previous size
 
         for(int i = 0; i < idx; i++){
             tp[i] = sap[i]; //copies sap to tp
@@ -103,12 +111,13 @@ using namespace std;
     sap[cnum] = prev; //Makes sure last element gets updated
    
     cnum++; // Since a student has been added, cnum is incremented (1 more student in cnum)
+   // cout << cnum << endl;
     return idx;
   }
 
     //Removes a student from an array by shifting all students after down 1
     int StudentEsa::remove(int idx) {
-        if (idx >= cmz || idx < 0) return -1; //Return error for invalid index
+        if (idx >= cnum || idx < 0) return -1; //Return error for invalid index
         Student* student = sap[idx];    //student pointer pints to array sap at index idx
         //Loop shifts everything down 1. This will overwrite the Student at the given index, therefore removing it
         for (int i = idx + 1; i < cnum; i++) {
