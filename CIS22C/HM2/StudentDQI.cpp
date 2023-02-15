@@ -66,7 +66,7 @@ using namespace std;
         if (isEmpty()) {
             return nullptr;
         }
-        Student* first = soa->get(front + 1);
+        Student* first = soa->get(front);
         //soa->remove(front);
         soa->set(nullptr, front);
         if (first == nullptr) {
@@ -80,7 +80,7 @@ using namespace std;
     Student* StudentDQI::lookFront(){
 
         //soa[btm]->get(btm);
-        return soa->get(front + 1);
+        return soa->get(front);
 
     }      // Return the first element but do not remove it
 
