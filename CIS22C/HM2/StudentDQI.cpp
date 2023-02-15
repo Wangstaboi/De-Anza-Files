@@ -1,3 +1,10 @@
+/**
+ * Name: Ryan Wang
+ * Date: 2/15/23
+ * HM2 - StudentDQI.cpp
+ * 
+*/
+
 #pragma once
 #include <iostream>
 #include "StudentDQI.h"
@@ -51,13 +58,13 @@ using namespace std;
     int StudentDQI::pushFront(Student* s){
 
        //*(soa[btm]) = s; 
-       front--;
+       //front--;
     //    if (soa->set(s, front) == -1) {
     //     cout << "Error!" << endl;
     //     cout << soa->getNum() << endl;
     //    };
-        soa->set(s, front);
-       
+        soa->set(s, front );
+        front--;
 
        return 0;
 
@@ -66,13 +73,15 @@ using namespace std;
         if (isEmpty()) {
             return nullptr;
         }
-        Student* first = soa->get(front);
-        //soa->remove(front);
-        soa->set(nullptr, front);
-        if (first == nullptr) {
-            cout << "Woops, we got a nullptr!" << endl;
-        }
+        Student* first = soa->get(front + 1);
+        
+        
+        soa->set(nullptr, front + 1);
         front++;
+        // if (first == nullptr) {
+        //     cout << "Woops, we got a nullptr!" << endl;
+        // }
+        
         
        return first;
 
@@ -80,28 +89,29 @@ using namespace std;
     Student* StudentDQI::lookFront(){
 
         //soa[btm]->get(btm);
-        return soa->get(front);
+        return soa->get(front + 1);
 
     }      // Return the first element but do not remove it
 
     int StudentDQI::pushBack(Student* s){
-        back++;
+        
         soa->append(s);
+        back++;
     
         return back;
     } // Append a new element to the back
     Student* StudentDQI::popBack(){
         if (isEmpty()) {
-            cout << "Hi mom" << endl;
+           // cout << "Hi mom" << endl;
             return nullptr;
         }
         Student* last = soa->get(back - 1);
         //soa->remove(back);
         back--;
         soa->set(nullptr, back);
-        if (last == nullptr) {
-            cout << "Hi dad" << endl;
-        }
+        // if (last == nullptr) {
+        //     cout << "Hi dad" << endl;
+        // }
         return last;
 
     }    // Remove the last element and return it

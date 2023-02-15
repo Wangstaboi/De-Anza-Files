@@ -14,13 +14,13 @@ Size:  3
 Command: B  67890  RizzutoPhil
 Pushed Back 67890  RizzutoPhil
 Command: G  -1  -1
-Woops, we got a nullptr!
+Pop Front 12345  KleinmanRonald
 Command: G  -1  -1
-Pop Front 87654  SmithMary
+Woops, we got a nullptr!
 Command: Z  -1  -1
 Empty : 0
 Command: H  -1  -1
-Look Front 54321  BerraYogi
+Look Front 87654  SmithMary
 Command: D  -1  -1
 404
 Look Backt 67890  RizzutoPhil

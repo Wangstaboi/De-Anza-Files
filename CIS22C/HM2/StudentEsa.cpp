@@ -56,11 +56,12 @@ using namespace std;
     //Returns student at given index
     Student* StudentEsa::get(int idx) {
         if ((idx < 0) || (idx > cnum)) {
-            cout << "Index: " << idx << " CNum: " << cnum << endl;
-            cout << "Nope. Didn't work." << endl;
+            // cout << "Index: " << idx << " CNum: " << cnum << endl;
+            // cout << "Nope. Didn't work." << endl;
             return (NULL);
             } // Bad index
         //cout << *(&sap[idx]) << endl;
+        //cout << "Index: " << idx << " CNum: " << cnum << endl;
         return (sap[idx]); // Otherwise return Student ptr at that index in the array
 
     }
@@ -130,6 +131,7 @@ using namespace std;
 
     //Calls the insert function but index is cnum (last occupied index)
     int StudentEsa::append(Student* s) {
+        
         
        return insert(s, cnum); //appending is just inserting but at the last element of an array
 
