@@ -38,7 +38,7 @@ using namespace std;
     } // Equate this to an existing DQ (can use private parts directly)
     StudentDQI::~StudentDQI(){
 
-        delete []soa;
+        delete soa; // Previously delete[] soa
 
     }; // Destruct the DQI (free OA space)
 
