@@ -116,7 +116,7 @@ using namespace std;
 
     }    // Remove the last element and return it
     Student* StudentDQI::lookBack(){
-        cout << back << endl;
+        //cout << back << endl;
         return soa->get(back - 1);
 
     }     // Return the last element but do not remove it

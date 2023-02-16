@@ -51,3 +51,166 @@ Student: ID = 54321  Name = BerraYogi
 Student: ID = 87654  Name = SmithMary
 Student: ID = 67890  Name = MantleMickey
 Student: ID = 99887  Name = MarisRoger
+
+Constructor with < and back - 1
+
+Read Array size 400  Read # commands 20
+Command: Z  -1  -1
+Empty : 1
+Command: F  12345  KleinmanRonald
+Pushed Front 12345  KleinmanRonald
+Command: Z  -1  -1
+Empty : 0
+Command: B  87654  SmithMary
+Pushed Back 87654  SmithMary
+Command: B  54321  BerraYogi
+Pushed Back 54321  BerraYogi
+Command: S  -1  -1
+Size:  3
+Command: B  67890  RizzutoPhil
+Pushed Back 67890  RizzutoPhil
+Command: G  -1  -1
+Index: 399 CNum: 403
+Pop Front 12345  KleinmanRonald
+Command: G  -1  -1
+Index: 400 CNum: 403
+Pop Front 87654  SmithMary
+Command: Z  -1  -1
+Empty : 0
+Command: H  -1  -1
+Index: 401 CNum: 403
+Look Front 54321  BerraYogi
+Command: D  -1  -1
+404
+Index: 404 CNum: 403
+Nope. Didn't work.
+Command: S  -1  -1
+Size:  2
+Command: F  67890  MantleMickey
+Pushed Front 67890  MantleMickey
+Command: B  89300  KoufaxSandy
+Pushed Back 89300  KoufaxSandy
+Command: B  89012  KoufaxSandy
+Pushed Back 89012  KoufaxSandy
+Command: F  99887  MarisRoger
+Pushed Front 99887  MarisRoger
+Command: S  -1  -1
+Size:  6
+Command: F  62109  FordWhitey
+Pushed Front 62109  FordWhitey
+Command: B  10200  SkowronMoose
+Pushed Back 10200  SkowronMoose
+
+-----------------------------------
+
+Constructor with <=
+
+Read Array size 400  Read # commands 20
+Command: Z  -1  -1
+Empty : 1
+Command: F  12345  KleinmanRonald
+Pushed Front 12345  KleinmanRonald
+Command: Z  -1  -1
+Empty : 0
+Command: B  87654  SmithMary
+Pushed Back 87654  SmithMary
+Command: B  54321  BerraYogi
+Pushed Back 54321  BerraYogi
+Command: S  -1  -1
+Size:  3
+Command: B  67890  RizzutoPhil
+Pushed Back 67890  RizzutoPhil
+Command: G  -1  -1
+Pop Front 12345  KleinmanRonald
+Command: G  -1  -1
+Woops, we got a nullptr!
+Command: Z  -1  -1
+Empty : 0
+Command: H  -1  -1
+Look Front 87654  SmithMary
+Command: D  -1  -1
+404
+Look Backt 67890  RizzutoPhil
+Command: S  -1  -1
+Size:  2
+Command: F  67890  MantleMickey
+Pushed Front 67890  MantleMickey
+Command: B  89300  KoufaxSandy
+Pushed Back 89300  KoufaxSandy
+Command: B  89012  KoufaxSandy
+Pushed Back 89012  KoufaxSandy
+Command: F  99887  MarisRoger
+Pushed Front 99887  MarisRoger
+Command: S  -1  -1
+Size:  6
+Command: F  62109  FordWhitey
+Pushed Front 62109  FordWhitey
+Command: B  10200  SkowronMoose
+Pushed Back 10200  SkowronMoose
+
+Student: ID = 10200  Name = SkowronMoose
+Student: ID = 89012  Name = KoufaxSandy
+Student: ID = 89300  Name = KoufaxSandy
+Student: ID = 67890  Name = RizzutoPhil
+Student: ID = 54321  Name = BerraYogi
+Student: ID = 67890  Name = MantleMickey
+Student: ID = 99887  Name = MarisRoger
+Student: ID = 62109  Name = FordWhitey
+
+--------------------------------------
+
+Latest Output 
+
+Read Array size 400  Read # commands 20
+Command: Z  -1  -1
+Empty : 1
+Command: F  12345  KleinmanRonald
+Pushed Front 12345  KleinmanRonald
+Command: Z  -1  -1
+Empty : 0
+Command: B  87654  SmithMary
+Pushed Back 87654  SmithMary
+Command: B  54321  BerraYogi
+Pushed Back 54321  BerraYogi
+Command: S  -1  -1
+Size:  3
+Command: B  67890  RizzutoPhil
+Pushed Back 67890  RizzutoPhil
+Command: G  -1  -1
+Pop Front 12345  KleinmanRonald
+Command: G  -1  -1
+Pop Front 87654  SmithMary
+Command: Z  -1  -1
+Empty : 0
+Command: H  -1  -1
+Look Front 54321  BerraYogi
+Command: D  -1  -1
+404
+Look Backt 67890  RizzutoPhil
+Command: S  -1  -1
+Size:  2
+Command: F  67890  MantleMickey
+Pushed Front 67890  MantleMickey
+Command: B  89300  KoufaxSandy
+Pushed Back 89300  KoufaxSandy
+Command: B  89012  KoufaxSandy
+Pushed Back 89012  KoufaxSandy
+Command: F  99887  MarisRoger
+Pushed Front 99887  MarisRoger
+Command: S  -1  -1
+Size:  6
+Command: F  62109  FordWhitey
+Pushed Front 62109  FordWhitey
+Command: B  10200  SkowronMoose
+Pushed Back 10200  SkowronMoose
+------------------
+Start Popping from bottom  8  Elements queued
+
+Student: ID = 10200  Name = SkowronMoose
+Student: ID = 89012  Name = KoufaxSandy
+Student: ID = 89300  Name = KoufaxSandy
+Student: ID = 67890  Name = RizzutoPhil
+Student: ID = 54321  Name = BerraYogi
+Student: ID = 67890  Name = MantleMickey
+Student: ID = 99887  Name = MarisRoger
+Student: ID = 62109  Name = FordWhitey
