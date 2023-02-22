@@ -82,8 +82,6 @@ writeHr:
 	mov edx, OFFSET colon
 	call writeString
 	
-
-
 writeMin:
 	mov cl, 10
 	cmp bh, cl
