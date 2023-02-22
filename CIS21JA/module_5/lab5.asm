@@ -1,9 +1,3 @@
-TITLE  Lab 4: Calculate alarm time, and predict flag values
-		
-; Don't forget this beginning documentation with your name
-; Name: Ryan Wang
-
-
 INCLUDE Irvine32.inc
 
 ; Part 1 
@@ -15,13 +9,31 @@ promptSnooze BYTE "Enter number of minutes of snooze: ",0
 string1 BYTE "Alarm set for ",0
 string2 BYTE " Hour and ",0
 string3 BYTE " minute",0
+error BYTE " Invalid Input. Try Again.",0
 
 .code
 main PROC
+jmp Start
+Start:
+	mov edx, OFFSET promptHr	; moves promptHR into edx
+	call writeString		; Writes out "Enter hour of get up time"
+	call readDec			; Takes user input for hour of get up time, stores in eax
+	jmp Hour
+	
+	; Add Loop
 
-mov edx, OFFSET promptHr	; moves promptHR into edx
-call writeString		; Writes out "Enter hour of get up time"
-call readDec			; Takes user input for hour of get up time, stores in eax
+Hour:
+	cmp eax, 23
+	ja Error
+	mov ebx, eax
+	mov eax, 0
+	cmp ebx, eax
+	jl Error
+
+Error: 
+	mov edx, OFFSET error
+	call writeString
+	jmp Start
 
 mov bl, al				; Moves hour to bl
 
@@ -29,11 +41,16 @@ mov edx, OFFSET promptMin	; moves promptMin into edx
 call writeString		; Writes out promptMin to console
 call readDec			; Takes user input (should be for min), stores in eax
 
+; Add Loop
+
+
 mov cl, al				; Moves minutes to cl
 
 mov edx, OFFSET promptSnooze	; moves promptSnooze into edx
 call writeString		; Writes out promptSnooze to console
 call readDec			; Takes user input (for snooze time in min) stores in eax
+
+; Add Loop
 
 mov dl, al
 
@@ -82,46 +99,3 @@ main ENDP
 
 
 END main
-
-
-
-
-
-
-
-
-COMMENT @
-Question 2 (5pts)
-Assume ZF, SF, CF, OF are all 0 at the start, and the 3 instructions below run one after another. 
-a. fill in the value of all 4 flags after each instruction runs 
-b. explain why CF and OF flags have that value 
-   Your explanation should not refer to signed or unsigned data values, 
-   such as "the result will be out of range" or "204 is larger than a byte"
-   or "adding 2 negatives can't result in a positive"
-   The ALU doesn't see signed vs. unsigned data and yet it can set the flags.
-   Your answer should use the reasoning that the ALU (hardware) uses.
-
-
-mov al, 0C0h 
-
-add al, 50h     
-    (1)
-	 1100 0000
-   + 0101 0000
-	 ---------
- (1) 0000 0000
-; a. ZF = 1  SF = 0  CF = 1  OF = 1 (Correct answer is 0)
-; b. explanation for CF: Add operation too big for al, therefore carry flag is 1 	
-;    explanation for OF: MSB is set to 1, therefore OF is 1 (Carry out xor carry in 1 xor 1 = 0)
-
-sub al, 0A0h     
-
-	0001 0000
-+   0110 0000
--------------
-(0) 0111 0000
-
-; a. ZF = 1 (correct answer 0)  SF = 0  CF = 0 (correct answer 1) OF = 0
-; b. explanation for CF: carry out is 0, opposite of carry out
-;    explanation for OF: Subtracting means smaller, so no overflow (also its positive)
-@

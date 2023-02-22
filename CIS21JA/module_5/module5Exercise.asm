@@ -3,6 +3,7 @@ TITLE Module 5 Exercise
 INCLUDE Irvine32.inc
 
 .data
+myS BYTE "Hello"
 
 .code
 main PROC
@@ -12,13 +13,13 @@ main PROC
 ; which instructions below will run?
 
 L2: 
-    mov eax, 5		; 
-	jmp L1			;  
-	mov ebx, 6		; 
-	mov ecx, 7		; 
-	jmp L2			; 
+    mov eax, 5		; yes
+	jmp L1			; yes (skips to L1)
+	mov ebx, 6		; no
+	mov ecx, 7		; no
+	jmp L2			; no
 L1:   
-	mov edx, 8		; 
+	mov edx, 8		; yes
 	  
 
 ; LOOP 
@@ -29,6 +30,8 @@ L3:
 	inc eax		; 
 	loop L3		; 
 				; 
+
+;;;;; loop runs amount of times set in ecx (i.e. if ecx is 4, loop runs 4 times)
 	
 ; what if, in the loop above, we use: mov ecx, 0 instead of: mov ecx, 4
 ; will the loop run? 
@@ -38,6 +41,7 @@ L3:
 ; write a nested loop using LOOP instructions: the outer loop runs 5 times
 ; the inner loop runs 3 times
 
+mov eax, 0
 
 
 
