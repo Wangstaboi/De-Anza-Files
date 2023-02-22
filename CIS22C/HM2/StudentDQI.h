@@ -8,7 +8,7 @@ using namespace std;
 class StudentDQI {
 private:
     StudentEsa* soa;  // Allocated Student Orderable Array (normally enabled)
-    //StudentEsa* tp;
+    
     //Student** sa; // Pointer to actual array of Student Ptrs
     
     // These might be useful;
