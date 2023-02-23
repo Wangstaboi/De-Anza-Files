@@ -8,6 +8,7 @@ INCLUDE Irvine32.inc
 
 ; Part 1 
 .data
+string BYTE "quiz",0
 promptHr BYTE "Enter hour of get up time: ",0
 promptMin BYTE "Enter minute of get up time: ",0
 promptSnooze BYTE "Enter number of minutes of snooze: ",0
