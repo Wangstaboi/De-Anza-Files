@@ -25,22 +25,37 @@ main PROC
 ; (or a memory variable!) to copy the data in eax.
 
 ; 1111111111101111 = -17
-mov eax, -17			; change eax value to test your code
-
-;mov ecx, 32				; load 32 into ecx for loop
+; 0000000000001010 = 10
+mov eax, 10			; change eax value to test your code
+mov ebx, 0				; zeroing out ebx -- will load number of 0s here
+mov ecx, 32				; load 32 into ecx for loop
 
 countzero:
-	
-	
+	ror eax, 1			; rotates to the right 1 bit
+	jnc zero			; if carry bit is 0, jumps to zero function
+	jc one				; if carry bit is 1, jumps to one function
+	cmp ecx, 0
+	jz print
+	;loop countzero		; loops 32 times
+zero:
+	inc ebx				; increments ebx if carry is zero
+	loop countzero
+	cmp ecx, 0
+	jz print
+one:
+	loop countzero
+	cmp ecx, 0
+	jz print
+print:
+	mov edx, OFFSET num0
+	call writeString
+	;call crlf
+	call writeInt
+	call crlf
+	call dumpRegs
 
-
-
-mov edx, OFFSET num0
-call writeString
-
-
-call crlf
-
+	;mov eax, ebx
+	;call writeDec
 
 ; Question 2a (5pts)
 ; Add code in the blank below to determine if a data value is a power of 2, 
