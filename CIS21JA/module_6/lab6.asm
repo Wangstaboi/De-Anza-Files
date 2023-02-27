@@ -24,9 +24,14 @@ main PROC
 ; the same after code is done printing, but without using another register
 ; (or a memory variable!) to copy the data in eax.
 
+; 1111111111101111 = -17
 mov eax, -17			; change eax value to test your code
 
+;mov ecx, 32				; load 32 into ecx for loop
 
+countzero:
+	
+	
 
 
 
