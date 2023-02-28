@@ -2,7 +2,7 @@ TITLE  Assignment 6: Bit-wise instructions
 
 ;;; lab requirement: use bitwise instructions when possible to make the code shorter
 		
-; Name:  
+; Name: Ryan Wang
 
 INCLUDE Irvine32.inc
 
@@ -27,7 +27,6 @@ main PROC
 ; 1111111111101111 = -17
 ; 0000000000001010 = 10
 
-COMMENT @
 mov eax, -10			; change eax value to test your code
 mov ebx, 0				; zeroing out ebx -- will load number of 0s here
 mov ecx, 32				; load 32 into ecx for loop
@@ -122,7 +121,7 @@ printing:
 call writeString
 call crl
 ;call writeInt
-@
+
 
 ; Question 2b (2pts): explain in your own words how the formula above works
 
@@ -137,9 +136,8 @@ call crl
 ;	SUBTRACT 32 FROM EACH LETTER 
 
 mov edx, OFFSET aStr
-;mov ebx, [edx]
+
 and DWORD PTR [edx], 0dfdfdfdfh
-;mov edx, ebx
 
 
  call writeString       ; should print: ABCD
