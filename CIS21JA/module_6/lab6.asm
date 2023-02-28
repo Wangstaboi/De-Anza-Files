@@ -57,7 +57,7 @@ print:
 	call crlf
 	
 	;call dumpRegs
-@
+
 	
 
 ; Question 2a (5pts)
@@ -71,7 +71,7 @@ print:
 ; You *cannot* use the CMP instruction in your code (try a bitwise instruction)
 ; Use power2 and notPower2 for your text output.
 
-mov eax, 64				; eax = val, change eax value to test your code	
+mov eax, 126				; eax = val, change eax value to test your code	
 ;mov ebx, 0					; Clear out ebx, ebx will be true/false register
 mov ecx, 32
 
@@ -120,9 +120,9 @@ mov edx, OFFSET notPower2
 
 printing:
 call writeString
-call crlf
+call crl
 ;call writeInt
-
+@
 
 ; Question 2b (2pts): explain in your own words how the formula above works
 
@@ -131,15 +131,18 @@ call crlf
 
 ; Question 3 (4pts): Given the array aStr as defined in .data above, 
 ; and ebx is initialized below.
-; Using ebx (not the aStr name), write ONE instruction in the blank below 
+; Using edx (not the aStr name), write ONE instruction in the blank below 
 ; to uppercase all the letters in str.
 
 ;	SUBTRACT 32 FROM EACH LETTER 
 
 mov edx, OFFSET aStr
+mov ebx, [edx]
+and ebx, 0dfdfdfdfh
+mov edx, ebx
 
 
-call writeString       ; should print: ABCD
+ call writeString       ; should print: ABCD
 
 	exit	
 main ENDP
