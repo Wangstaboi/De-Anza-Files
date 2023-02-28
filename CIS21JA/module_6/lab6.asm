@@ -137,9 +137,9 @@ call crl
 ;	SUBTRACT 32 FROM EACH LETTER 
 
 mov edx, OFFSET aStr
-mov ebx, [edx]
-and ebx, 0dfdfdfdfh
-mov edx, ebx
+;mov ebx, [edx]
+and DWORD PTR [edx], 0dfdfdfdfh
+;mov edx, ebx
 
 
  call writeString       ; should print: ABCD
