@@ -71,7 +71,7 @@ print:
 ; Use power2 and notPower2 for your text output.
 
 mov eax, 126				; eax = val, change eax value to test your code	
-;mov ebx, 0					; Clear out ebx, ebx will be true/false register
+mov ebx, 0					; Clear out ebx, ebx will be true/false register
 mov ecx, 32
 
 zeroloop:
