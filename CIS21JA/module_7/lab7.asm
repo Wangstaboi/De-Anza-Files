@@ -13,10 +13,14 @@ errorMsg BYTE "Invalid Input, Try Again.",0
 timeArr BYTE, 2 DUP(?)
 
 
+; STACK IS LIFO
+; POP OPPOSITE OF PUSH ORDER
+
 
 .code
 main PROC
 
+; Lab 5 Version
 hour:
 	mov edx, OFFSET promptHr	; moves promptHR into edx
 	
@@ -26,6 +30,14 @@ hour:
 	mov ecx, 23				; cl equals 23
 	cmp eax, ecx
 	ja errorHr
+
+; Lab 7 Version
+hour:
+	push OFFSET promptHr
+	push OFFSET errorMsg
+	push 59
+	call readTime
+
 
 mov bl, al				; Moves hour to bl
 
@@ -170,9 +182,22 @@ main ENDP
 
 END main
 
+; Stack stuff:
+;	- push []
+
 
 PROC readTime
-	
+	push ebp		; save current ebp
+	mov ebp, esp	; save esp into ebp now so we can do shit with it if we want i guess
+	push edx		; save whatever was already in edx (might be unnecessary)
+
+	mov edx, [ebp + 20] ; Moves [ebp + 20] into edx (SHOULD be promptHr)
+	call writeString
+
+	call readDec
+	cmp eax, [ebp + 12] ; compares eax (user inputted hour) with [ebp + 12] (SHOULD be max hr)
+	ja errorHr
+	push eax			; Moves current eax value (SHOULD be current hr)
 
 readTime ENDP
 
