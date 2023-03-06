@@ -46,7 +46,7 @@ hour:
 	push OFFSET errorMsg
 	push 23
 	call readTime
-	pop eax						; 
+	pop [timeArr]						
 
 min:
 	sub esp, 4					; saves room for return value (return value -- esp)
@@ -54,14 +54,15 @@ min:
 	push OFFSET errorMsg
 	push 59
 	call readTime
-	pop eax
+	pop [timeArr + 1]
+
 snooze:
 	sub esp, 4					; saves room for return value (return value -- esp)
 	push OFFSET promptSnooze
 	push OFFSET errorMsg
 	push 59
 	call readTime
-	pop eax
+	pop ebx						; snooze time in eax - may change later
 
 main ENDP
 
@@ -73,7 +74,7 @@ readTime PROC
 	basePointer:
 		push ebp		; save current ebp
 		mov ebp, esp	; save esp into ebp now so we can do shit with it if we want i guess
-		;push edx		; save whatever was already in edx (might be unnecessary)
+		push edx		; save whatever was already in edx (might be unnecessary)
 
 	writeFunc:
 		mov edx, [ebp + 16] ; Moves [ebp + 20] into edx (SHOULD be promptHr)
@@ -85,6 +86,7 @@ readTime PROC
 
 		; if not error do following:
 		mov [ebp + 16], eax	; Moves user input (eax) into [ebp + 20] (top of stack)
+		pop edx				; Pop edx back
 		pop ebp				; pops out bottom (ebp) back into ebp
 		ret 16				; pops out eip and next 3 stack elements (16 bytes)
 
@@ -97,6 +99,7 @@ readTime PROC
 readTime ENDP
 	
 calcTime PROC
+	; SnoozeTime in ebx, hr and min in timeArr
 
 
 calcTime ENDP
