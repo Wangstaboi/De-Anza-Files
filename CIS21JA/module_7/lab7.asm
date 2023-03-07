@@ -2,7 +2,8 @@ INCLUDE Irvine32.inc
 
 ; Part 1 
 
-zeroFill MACRO			; Adds a zero if value is less than 10
+zeroFill MACRO 			; Adds a zero if value (assumes value is in eax) is less than 10
+	LOCAL addZero
 	cmp eax, 10
 	jg addZero
 	call writeDec
@@ -100,7 +101,26 @@ readTime ENDP
 	
 calcTime PROC
 	; SnoozeTime in ebx, hr and min in timeArr
+	; TODO - Load the array times into minutes, subtract snooze time
+	; If calculated wakeup time is not valid, replace hour with -1
 
+	mov cl, [timeArr]				; Move hour into al
+	cmp cl, 0
+	jg invalidHr
+
+	invalidHr:
+		mov cl, -1
+		jmp calcMin
+
+	mul cl, 60
+	add cx, [timeArr + 1]			; Adds Hrs and minutes
+	movzx ecx, cx
+	sub ecx, ebx
+
+
+	calcMin:
+		
+	
 
 calcTime ENDP
 
