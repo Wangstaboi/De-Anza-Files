@@ -18,7 +18,7 @@ zeroFill MACRO time		; Adds a zero if value (assumes value is in eax) is less th
 		call writeDec
 
 	end:
-		call crlf
+		
 		
 ENDM
 
@@ -69,16 +69,27 @@ snooze:
 	pop ebx						; snooze time in eax - may change later
 
 printTime:
+	
+	call calcTime
+
+	mov ecx, DWORD PTR [timeArr]
+	;cmp ecx, 1
 	js invalidHr
+
 	mov edx, OFFSET string1		; Load in "Alarm set for"
 	call writeString
 
-	zeroFill OFFSET timeArr
+	mov eax, DWORD PTR [timeArr]
+	zeroFill eax
 	
 	mov edx, OFFSET colon		; load in ":"
 	call writeString
 
-	zeroFill OFFSET timeArr
+	mov eax, DWORD PTR [timeArr + 1]
+	zeroFill eax
+
+	call crlf
+	jmp hour
 
 	invalidHr:
 		mov edx, OFFSET errorMsg
