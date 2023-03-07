@@ -104,19 +104,19 @@ calcTime PROC
 	; TODO - Load the array times into minutes, subtract snooze time
 	; If calculated wakeup time is not valid, replace hour with -1
 
-	mov cl, [timeArr]				; Move hour into al
-	cmp cl, 0
+	mov al, [timeArr]				; Move hour into al
+	cmp al, 0
 	jg invalidHr
 
 	invalidHr:
-		mov cl, -1
+		mov al, -1
 		jmp calcMin
 
-	mul cl, 60
+	mul al, 60
 	add cx, [timeArr + 1]			; Adds Hrs and minutes
-	movzx ecx, cx
-	sub ecx, ebx
-
+	;movzx ecx, cx
+	sub cx, bx					; Subtracts SnoozeTime from total time
+	div cx
 
 	calcMin:
 		
