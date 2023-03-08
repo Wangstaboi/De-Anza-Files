@@ -3,17 +3,18 @@ INCLUDE Irvine32.inc
 ; Name: Ryan Wang
 ; Part 1 
 
-zeroFill MACRO time		; Adds a zero if value (assumes value is in eax) is less than 10
+zeroFill MACRO time		; Adds a zero if value (assumes value is in eax) is less than 10 (48)
 	LOCAL addZero
 	LOCAL end
-	push ecx
+	push edx
 	;push ebx
 	;mov eax, time
-	mov ecx, 10
-	cmp time, ecx
+	mov edx, 10
+	cmp time, edx
 	js addZero
+	mov eax, time
 	call writeDec
-	pop ecx
+	pop edx
 	jmp end				; May change later
 
 	addZero:
@@ -54,7 +55,7 @@ hour:
 	push 23
 	call readTime
 	pop eax
-	mov SDWORD PTR [timeArr], eax
+	mov timeArr[0], al
 
 min:
 	sub esp, 4					; saves room for return value (return value -- esp)
@@ -63,7 +64,7 @@ min:
 	push 59
 	call readTime
 	pop eax
-	mov DWORD PTR [timeArr + 1], eax
+	mov timeArr[1], al
 
 snooze:
 	sub esp, 4					; saves room for return value (return value -- esp)
@@ -71,28 +72,31 @@ snooze:
 	push OFFSET errorMsg
 	push 59
 	call readTime
-	pop ebx						; snooze time in eax - may change later
+	pop ecx						; snooze time in eax - may change later
 
 printTime:
 	
-	;call calcTime
-
-	mov ecx, DWORD PTR [timeArr]
-	cmp ecx, 1
-	js invalidHr
+	call calcTime
+	;and ecx, 0
+	mov edx, 0
+	mov dl, timeArr[0]
+	cmp dl, 1
+	;js invalidHr
 
 	mov edx, OFFSET string1		; Load in "Alarm set for"
 	call writeString
 
-	;mov eax, DWORD PTR [timeArr]
-	mov ebx, 9
+
+	mov ebx, 0
+	mov bl, timeArr[0]
 	zeroFill ebx
 	
 	mov edx, OFFSET colon		; load in ":"
 	call writeString
 
-	;mov eax, DWORD PTR [timeArr + 1]
-	mov ebx, 9
+	
+	mov ebx, 0
+	mov bl, timeArr[1]
 	zeroFill ebx
 
 	call crlf
@@ -101,6 +105,7 @@ printTime:
 	invalidHr:
 		mov edx, OFFSET errorMsg
 		call writeString
+		call crlf
 
 	jmp hour
 main ENDP
@@ -108,7 +113,7 @@ main ENDP
 ; Stack stuff:
 ;	- push []
 
-
+; RETURNS - HOUR/MIN/SNOOZE
 readTime PROC
 	basePointer:
 		push ebp		; save current ebp
@@ -121,13 +126,14 @@ readTime PROC
 		call readInt
 		;push eax			; Push user input into stack
 		cmp eax, [ebp + 8]  ; compares eax (user inputted hour) with [ebp + 12] (SHOULD be max hr)
+		;mov eax, [ebp + 8]	; Testing if true
 		jg error			; If error, jump to error block
 
 		; if not error do following:
 		mov [ebp + 16], eax	; Moves user input (eax) into [ebp + 20] (top of stack)
 		pop edx				; Pop edx back
 		pop ebp				; pops out bottom (ebp) back into ebp
-		ret 16				; pops out eip and next 3 stack elements (16 bytes)
+		ret 8				; pops out eip and next 3 stack elements (16 bytes)
 
 	error:
 		mov edx, OFFSET errorMsg	; move error to edx
@@ -137,33 +143,45 @@ readTime PROC
 
 readTime ENDP
 	
-; TODO - FIX THIS SHIT
+; TODO - FIX THIS SHIT - Snooze in ecx
 calcTime PROC
 	; SnoozeTime in ebx, hr and min in timeArr
 	; TODO - Load the array times into minutes, subtract snooze time
 	; If calculated wakeup time is not valid, replace hour with -1
-	mov eax, 0
-	mov al, timeArr				; Move hour into al
+
+	
+	mov al, timeArr[0]
 	cmp al, 1
-	jg invalidHr
+	js invalidHr
 	jmp restOfFunc
+
 	invalidHr:
-		mov timeArr, -1
+		mov timeArr[0], -1
 		jmp calcMin
 	
 	restOfFunc:
-		mov bl, 60
-		mul bl
-		add ax, WORD PTR [timeArr + 1]			; Adds Hrs and minutes
+		mov eax, 0				; Zeros out eax
+		mov al, timeArr[0]		; Loads hour into al
+		mov ebx, 0				; Zeros out ebx
+		mov bl, 60				; loads 60 into bl
+		mul bl					; Multiplies AL (hr) by 60
+		mov ebx, 0				; Zeros out edx
+		mov bl, timeArr[1]		; Loads minutes into dl
+		movzx bx, bl			; expands dl into dx
+		add ax, bx		; Adds Hrs (ax) and minutes (dx)
 
-		;movzx ecx, cx
+		
 
-		sub ax, bx					; Subtracts SnoozeTime from total time
+		sub ax, cx					; Subtracts SnoozeTime from total time
+		js invalidHr
+
 		mov dx, 0					; Zeroing out DX for 16 bit division
 		mov cx, 60					; Divisor is CX (60)
 		div cx
-		mov WORD PTR [timeArr], ax			; Move hours to timeArr[0]
-		mov WORD PTR [timeArr + 1], dx		; Move minutes to timeArr[1]
+		;mov eax, 0
+		;mov edx, 0
+		mov timeArr[0], al			; Move hours to timeArr[0]
+		mov timeArr[1], dl		; Move minutes to timeArr[1]
 
 	calcMin:
 		ret
