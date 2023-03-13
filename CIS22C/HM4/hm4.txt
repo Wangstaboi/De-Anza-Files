@@ -1,0 +1,12 @@
+    
+    
+Q1:  
+   In a max heap, every node is greater than or equal to its children, and in a min heap, every node is less than or equal to its children. A BST only guarantees that the left subtree of a node contains values less than the node, and the right subtree contains values greater than the node. There is no ordering.
+
+   In a BST, insertion and removal require traversing the tree and maintaining the BST. In a heap array however, you don't have to traverse a tree, and can instantly find the element in O(1) time.
+
+
+
+
+Q2:
+    Elements at the same priority level are returned FIFO. Elements added first have slightly higher priority.
