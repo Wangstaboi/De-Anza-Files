@@ -85,7 +85,13 @@ ENDM
 ; eax                   -4
 ; ecx                   -8
 
-
+;10010
+; 1000
+; 0001 0010
+; 1111 0000
+; 1110 0010
+; 1100 0100
+; 1000 1000
 proc1 PROC 
     ;sub esp, 4
     push ebp
@@ -98,7 +104,7 @@ proc1 PROC
     zeroLoop:
         mov DWORD PTR [eax], 0
         add eax, 8              ; Move arr index down 2 (2 BYTES)
-        sub ecx, 2
+        sub ecx, 2              ; 
         cmp ecx, 0
         jg zeroLoop
 
@@ -130,7 +136,7 @@ These sample questions are to read code
 4. With the procedure call to proc1 of question 3, show a diagram
 of the stack frame of proc1 at the point right after all the even indexed
 elements have been zeroed out. 
-For each value in the stack frame, you can either put the register 
+For each value in the stack frame, you can either pueems more like a very stripped down C interpreter.t the register 
 name that holds the value (such as: eax), or describe what the value 
 is (such as: return addr in main)
 Make sure to list the values in the order that they appear in the stack,
@@ -188,3 +194,27 @@ acccepts arguments through registers
 ; mov ebp, esp is only done when accessing the stack. When performing operations on registers it does nothing.
 
 !
+
+
+    ;mov ax, 0
+    mov ax, num
+    mov dx, 0
+    mov cx, 4
+    div cx
+    test ax, 1
+    jz L1
+    inc di
+    ;jmp L2
+    L1 : inc di
+    L2 : inc di
+
+    mov ax, 0
+    mov ax, num
+    mov dx, 0
+    mov cx, 4
+    div cx
+    test ax, 1
+    jz L1
+    jmp L2
+    L1 : inc di
+    L2 : inc di
